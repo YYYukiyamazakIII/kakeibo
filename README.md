@@ -1,24 +1,70 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## expenses テーブル
 
-Things you may want to cover:
+| Colum       | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| name        | string     |                                |
+| value       | integer    | null: false                    |
+| category_id | integer    |                                |
+| user_id     | references | null: false, foreign_key: true |
 
-* Ruby version
+### Association
 
-* System dependencies
+- belongs_to :user
 
-* Configuration
+## users テーブル
 
-* Database creation
+| Colum         | Type    | Options                   |
+| ------------- | ------- | ------------------------- |
+| name          | string  | null: false               |
+| mail_address  | string  | null: false, unique: true |
+| password      | string  | null: false               |
+| prefecture_id | integer |                           |
+| city          | string  |                           |
+| text          | text    |                           |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :expenses
+- has_many :tweets
+- has_many :comments
+- has_many :nices
 
-* Services (job queues, cache servers, search engines, etc.)
+## tweets テーブル
 
-* Deployment instructions
+| Colum   | Type       | Options                        |
+| ------- | ---------  | ------------------------------ |
+| text    | text       | null: false                    |
+| user_id | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :user
+- has_many :comments
+- has_many :nices
+
+## comments テーブル
+
+| Colum    | Type       | Options                        |
+| -------- | ---------  | ------------------------------ |
+| text     | text       | null: false                    |
+| user_id  | references | null: false, foreign_key: true |
+| tweet_id | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :tweet
+
+## nices テーブル
+
+| Colum    | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| user_id  | references | null: false, foreign_key: true |
+| tweet_id | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :tweet
