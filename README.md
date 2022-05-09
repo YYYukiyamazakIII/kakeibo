@@ -18,7 +18,7 @@
 | Colum         | Type    | Options                   |
 | ------------- | ------- | ------------------------- |
 | name          | string  | null: false               |
-| mail_address  | string  | null: false, unique: true |
+| email         | string  | null: false, unique: true |
 | password      | string  | null: false               |
 | prefecture_id | integer |                           |
 | city          | string  |                           |
