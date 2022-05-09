@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="expense-show.css">
+    <title>expenses-show</title>
+  </head>
+  <body>
+    <div class="month">
+      <div>前の日</div>
+      <div>5月9日</div>
+      <div>次の日</div>
+    </div>
+    <div class="total-price">
+      合計金額：1,000円
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">名前</th>
+          <th scope="col">カテゴリ</th>
+          <th scope="col">値段</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>にんじん</td>
+          <td>食費</td>
+          <td>¥150</td>
+          <td>編集 / 削除</td>
+        </tr>
+        <tr>
+          <td>玉ねぎ</td>
+          <td>食費</td>
+          <td>¥200</td>
+          <td>編集 / 削除</td>
+        </tr>
+        <tr>
+          <td>ジャガイモ</td>
+          <td>食費</td>
+          <td>¥250</td>
+          <td>編集 / 削除</td>
+        </tr>
+      </tbody>
+    </table>
+    <form>
+      <input type="text" placeholder="date">
+      <input type="text" placeholder="名前">
+      <input type="text" placeholder="値段">
+      <input type="text" placeholder="カテゴリ">
+      <input type="submit" value="登録">
+    </form>
+  </body>
+</html>
