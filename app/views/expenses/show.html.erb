@@ -11,50 +11,60 @@
     <title>expenses-show</title>
   </head>
   <body>
-    <div class="month">
-      <div>前の日</div>
-      <div>5月9日</div>
-      <div>次の日</div>
+    <div class="upper-contents">
+      <div class="month">
+        <div>前の日</div>
+        <div>5月9日</div>
+        <div>次の日</div>
+      </div>
+      <div class="total-price">
+        合計金額：<%=@total_value%>円
+      </div>
     </div>
-    <div class="total-price">
-      合計金額：1,000円
+    <div class="main-contents">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">名前</th>
+            <th scope="col">カテゴリ</th>
+            <th scope="col">値段</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @expenses.each do |expense| %>
+            <tr>
+              <td><%= expense.name  %></td>
+              <td><%= expense.category.name %></td>
+              <td><%= expense.value %></td>
+              <td>編集 / 削除</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">名前</th>
-          <th scope="col">カテゴリ</th>
-          <th scope="col">値段</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>にんじん</td>
-          <td>食費</td>
-          <td>¥150</td>
-          <td>編集 / 削除</td>
-        </tr>
-        <tr>
-          <td>玉ねぎ</td>
-          <td>食費</td>
-          <td>¥200</td>
-          <td>編集 / 削除</td>
-        </tr>
-        <tr>
-          <td>ジャガイモ</td>
-          <td>食費</td>
-          <td>¥250</td>
-          <td>編集 / 削除</td>
-        </tr>
-      </tbody>
-    </table>
-    <form>
-      <input type="text" placeholder="date">
-      <input type="text" placeholder="名前">
-      <input type="text" placeholder="値段">
-      <input type="text" placeholder="カテゴリ">
-      <input type="submit" value="登録">
-    </form>
+    <div class="lower-contents">
+          <%= form_with(model:@expense, local:true) do |f| %>
+            <div class="row g-3">
+              <div class="col">
+                <%= f.date_field :date, class:"form-control" %>
+              </div>
+              <div class="col">
+                <%= f.text_field :name, placeholder:"名前", class:"form-control" %>
+              </div>
+              <div class="col">
+                <%= f.text_field :value, placeholder:"値段", class:"form-control" %>
+              </div>
+              <div class="col">
+                <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"form-control"}) %>
+              </div>
+              <div class="col">
+                <%= f.submit "登録", class:"btn btn-primary"%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

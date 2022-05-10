@@ -1,13 +1,28 @@
+.upper-contents{
+  height: 20vh;
+}
+
 .month{
   display: flex;
   justify-content: space-around;
   font-size: 25px;
-  margin: 20px 0;
+  padding: 20px 0;
 }
 
 .total-price{
   display: flex;
   justify-content: center;
   font-size: 25px;
-  margin: 20px 0;
+
+}
+
+.main-contents{
+  height: 70vh;
+}
+
+.lower-contents{
+  height: 10vh;
+  background-color: lightgrey;
+  display: flex;
+  align-items: center;
 }
