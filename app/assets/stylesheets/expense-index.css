@@ -1,0 +1,16 @@
+.calendar-box{
+  margin-top: 25px;
+  font-size: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.total_value{
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.category_value{
+  margin: 10px 0;
+  font-size: 20px;
+}

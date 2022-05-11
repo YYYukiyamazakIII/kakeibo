@@ -1,1 +1,40 @@
-<%= link_to %>
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="expense-index.css">
+    <title>expenses-index</title>
+  </head>
+  <body>
+    <%= month_calendar do |date| %>
+      <% @daily_value = 0 %>
+      <% @expenses.where(date:date).each do |expense| %>
+        <% @daily_value += expense.value %>
+      <% end %>
+      <%= date.day %>
+      <div class= "calendar-box">
+        <%= link_to "#{@daily_value}円", new_expense_path(date) %>
+      </div>
+    <% end %>
+    <div class="lower-content">
+      <div class="total_value">
+        合計金額：<%= @total_value %>円
+      </div>
+      <% @category_count.times do |i| %>
+        <% @category_value = 0 %>
+        <% @category_name = '' %>
+        <% i += 1 %>
+        <% @expenses.where(category_id:i).each do |expense| %>
+          <% @category_value += expense.value %>
+          <% @category_name = expense.category.name %>
+        <% end %>
+        <% unless @category_name == '' %>
+          <div class="category_value">
+            <%= @category_name %>：<%= @category_value %>円
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </body>
+</html>

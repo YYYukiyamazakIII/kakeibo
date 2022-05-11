@@ -18,6 +18,7 @@
 
 .main-contents{
   height: 70vh;
+  overflow: scroll;
 }
 
 .lower-contents{
@@ -25,4 +26,5 @@
   background-color: lightgrey;
   display: flex;
   align-items: center;
+  padding-left: 20px;
 }
