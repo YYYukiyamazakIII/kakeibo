@@ -28,12 +28,8 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    @expense = Expense.new(expense_params)
-    if @expense.save
-      redirect_to action: :index
-    else
-      redirect_to action: :index
-    end
+    @expense = Expense.create(expense_params)
+    render json:{ post: post }
   end
 
   private
