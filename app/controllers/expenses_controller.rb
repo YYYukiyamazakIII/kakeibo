@@ -4,8 +4,10 @@ class ExpensesController < ApplicationController
       today = Time.now
       today = today.to_s
       @expenses = Expense.where('date like ?', "#{today.slice(0..6)}%")
+      @expenses = Expense.where(user_id: current_user.id)
     else
       @expenses = Expense.where('date like ?', "#{params[:start_date].slice(0..6)}%")
+      @expenses = Expense.where(user_id: current_user.id)
     end
     @total_value = 0
     @expenses.each do |expense|
@@ -17,6 +19,7 @@ class ExpensesController < ApplicationController
   def new
     @date = params[:format]
     @expenses = Expense.where(date: @date).order('created_at DESC')
+    @expenses = Expense.where(user_id: current_user.id)
     @total_value = 0
     @expenses.each do |expense|
       @total_value += expense.value
