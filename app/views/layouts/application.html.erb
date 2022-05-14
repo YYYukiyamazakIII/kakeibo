@@ -4,11 +4,40 @@
     <title>Kakeibo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <header class="header">
+    <div class="left-contents">
+      <div class="logo">
+        kakeibo
+      </div>
+    </div>
+    <div class="right-contents">  
+      <div class="tweet">
+        つぶやき
+      </div>
+      <div class="kakeibo">
+        <%= link_to "家計簿", expenses_path %>
+      </div>
+      <% if user_signed_in? %>
+        <div class="my-page">
+          <%= current_user.name %>
+        </div>
+        <div class="logout">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </div>
+      <% else%>
+        <div class="sign-up">
+          <%= link_to "新規登録", new_user_registration_path %> 
+        </div>
+        <div class="login">
+          <%= link_to "ログイン", new_user_session_path %>
+        </div>
+      <% end %>
+    </div>
+  </header>
   <body>
     <%= yield %>
   </body>

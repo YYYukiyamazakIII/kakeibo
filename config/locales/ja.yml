@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        prefecture_id: 都道府県
+        city: 市区町村
+        profile: プロフィール

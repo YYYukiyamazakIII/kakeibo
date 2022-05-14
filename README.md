@@ -4,9 +4,9 @@
 
 | Colum       | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
-| name        | string     |                                |
+| name        | string     | null: false                    |
 | value       | integer    | null: false                    |
-| category_id | integer    |                                |
+| category_id | integer    | null: false                    |
 | user_id     | references | null: false, foreign_key: true |
 
 ### Association
@@ -20,8 +20,8 @@
 | name          | string  | null: false               |
 | email         | string  | null: false, unique: true |
 | password      | string  | null: false               |
-| prefecture_id | integer |                           |
-| city          | string  |                           |
+| prefecture_id | integer | null: false               |
+| city          | string  | null: false               |
 | text          | text    |                           |
 
 ### Association

@@ -1,22 +1,27 @@
 class ExpensesController < ApplicationController
   def index
-    @expenses = Expense.where('date like ?', "#{params[:start_date].slice(0..6)}%")
+    if params[:start_date].nil?
+      today = Time.now
+      today = today.to_s
+      @expenses = Expense.where('date like ?', "#{today.slice(0..6)}%")
+    else
+      @expenses = Expense.where('date like ?', "#{params[:start_date].slice(0..6)}%")
+    end
     @total_value = 0
     @expenses.each do |expense|
       @total_value += expense.value
     end
     @category_count = Category.count
-
   end
 
   def new
-    @expense = Expense.new
     @date = params[:format]
-    @expenses = Expense.where(date:@date).order("created_at DESC")
+    @expenses = Expense.where(date: @date).order('created_at DESC')
     @total_value = 0
     @expenses.each do |expense|
       @total_value += expense.value
     end
+    @expense = Expense.new
   end
 
   def create
@@ -24,13 +29,13 @@ class ExpensesController < ApplicationController
     if @expense.save
       redirect_to action: :index
     else
-      render :index
+      redirect_to action: :index
     end
   end
 
   private
-  def expense_params
-    params.require(:expense).permit(:name, :value, :category_id, :date)
-  end
 
+  def expense_params
+    params.require(:expense).permit(:name, :value, :category_id, :date).merge(user_id: current_user.id)
+  end
 end

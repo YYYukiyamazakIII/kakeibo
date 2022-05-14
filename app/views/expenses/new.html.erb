@@ -4,9 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="expense-new.css">
     <title>expenses-new</title>
   </head>
@@ -25,6 +23,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th></th>
             <th scope="col">名前</th>
             <th scope="col">カテゴリ</th>
             <th scope="col">値段</th>
@@ -34,6 +33,7 @@
         <tbody>
           <% @expenses.each do |expense| %>
             <tr>
+              <td></td>
               <td><%= expense.name  %></td>
               <td><%= expense.category.name %></td>
               <td><%= expense.value %></td>
@@ -44,27 +44,26 @@
       </table>
     </div>
     <div class="lower-contents">
-          <%= form_with(model:@expense, local:true) do |f| %>
-            <div class="row g-3">
-              <div class="col">
-                <%= f.date_field :date, class:"form-control" %>
-              </div>
-              <div class="col">
-                <%= f.text_field :name, placeholder:"名前", class:"form-control" %>
-              </div>
-              <div class="col">
-                <%= f.text_field :value, placeholder:"値段", class:"form-control" %>
-              </div>
-              <div class="col">
-                <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"form-control"}) %>
-              </div>
-              <div class="col">
-                <%= f.submit "登録", class:"btn btn-primary"%>
-              </div>
-            </div>
-          <% end %>
+      <%= form_with(model:@expense, local:true) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        <div class="row g-3">
+          <div class="col">
+            <%= f.date_field :date, class:"form-control" %>
+          </div>
+          <div class="col">
+            <%= f.text_field :name, placeholder:"名前", class:"form-control" %>
+          </div>
+          <div class="col">
+            <%= f.text_field :value, placeholder:"値段", class:"form-control" %>
+          </div>
+          <div class="col">
+            <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"form-control"}) %>
+          </div>
+          <div class="col">
+            <%= f.submit "登録", class:"btn btn-primary"%>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </body>
 </html>

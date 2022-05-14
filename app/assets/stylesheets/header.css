@@ -1,0 +1,26 @@
+.header{
+  height: 6vh;
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgray;
+}
+
+.left-contents{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  font-size: 20px;
+  margin-left: 30px;
+}
+
+.right-contents{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
