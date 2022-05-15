@@ -9,7 +9,7 @@
   padding: 20px 0;
 }
 
-.total-price{
+#total-value-space{
   display: flex;
   justify-content: center;
   font-size: 25px;

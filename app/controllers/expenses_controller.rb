@@ -18,8 +18,7 @@ class ExpensesController < ApplicationController
 
   def new
     @date = params[:format]
-    @expenses = Expense.where(date: @date).order('created_at DESC')
-    @expenses = Expense.where(user_id: current_user.id)
+    @expenses = Expense.where(date: @date, user_id: current_user.id).order('created_at DESC')
     @total_value = 0
     @expenses.each do |expense|
       @total_value += expense.value
@@ -28,8 +27,12 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    @expense = Expense.create(expense_params)
-    render json:{ post: post }
+    post = Expense.new(expense_params)
+    if post.save
+      name = post.category.name
+      render json:{ post: post, name: name }
+    end
+
   end
 
   private
