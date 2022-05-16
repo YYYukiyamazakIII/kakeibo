@@ -1,6 +1,6 @@
 const buildHTML = (XHR) => {
   const item = XHR.response.post;
-  const name = XHR.response.name
+  const name = XHR.response.name;
   const html = `
     <tr>
       <td></td>
@@ -23,14 +23,18 @@ function post (){
     XHR.responseType = "json";
     XHR.send(formData);
     XHR.onload = () => {
+      if(XHR.response.judge == false){
+        XHR.response.message.forEach(function(message){
+          alert(message)
+        })
+        return null;
+      };
       const list = document.getElementById("list");
-      const formDate = document.getElementById("form-date");
       const formName = document.getElementById("form-name");
       const formValue = document.getElementById("form-value");
       const formCategoryId = document.getElementById("form-category_id");
       list.insertAdjacentHTML("afterbegin", buildHTML(XHR));
       calc()
-      formDate.value = "";
       formName.value = "";
       formValue.value = "";
       formCategoryId.value = "";
@@ -49,7 +53,6 @@ function calc (){
   expenseValueList.forEach(function(value){
     totalValue += Number(value)
   })
-  console.log(totalValue)
   totalValueSpace.innerHTML = `合計金額：${totalValue}円`
 }
 

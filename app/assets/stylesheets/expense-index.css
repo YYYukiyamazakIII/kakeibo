@@ -1,3 +1,16 @@
+.index-contents{
+  display: flex;
+}
+
+.calendar{
+  width: 75vw;
+  padding: 0 10px;
+}
+
+.calendar-title{
+  font-size: 30px;
+}
+
 .calendar-box{
   margin-top: 25px;
   font-size: 18px;
@@ -5,12 +18,22 @@
   justify-content: flex-end;
 }
 
-.total_value{
-  margin: 10px 0;
+.month-list{
+  width: 25vw;
+  padding: 0 10px;
   font-size: 20px;
+}
+
+.month-list-title{
+  text-align: center;
+  padding: 50px 0 10px 0;
+}
+
+.month-lists{
+  height: 530px;
+  overflow: scroll;
 }
 
 .category_value{
   margin: 10px 0;
-  font-size: 20px;
 }

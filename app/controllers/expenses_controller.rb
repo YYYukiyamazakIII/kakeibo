@@ -1,13 +1,12 @@
 class ExpensesController < ApplicationController
   def index
+    @current_user_expense = Expense.where(user_id: current_user.id)
     if params[:start_date].nil?
       today = Time.now
       today = today.to_s
-      @expenses = Expense.where('date like ?', "#{today.slice(0..6)}%")
-      @expenses = Expense.where(user_id: current_user.id)
+      @expenses = @current_user_expense.where('date like ?', "#{today.slice(0..6)}%")
     else
-      @expenses = Expense.where('date like ?', "#{params[:start_date].slice(0..6)}%")
-      @expenses = Expense.where(user_id: current_user.id)
+      @expenses = @current_user_expense.where('date like ?', "#{params[:start_date].slice(0..6)}%")
     end
     @total_value = 0
     @expenses.each do |expense|
@@ -19,10 +18,6 @@ class ExpensesController < ApplicationController
   def new
     @date = params[:format]
     @expenses = Expense.where(date: @date, user_id: current_user.id).order('created_at DESC')
-    @total_value = 0
-    @expenses.each do |expense|
-      @total_value += expense.value
-    end
     @expense = Expense.new
   end
 
@@ -31,6 +26,10 @@ class ExpensesController < ApplicationController
     if post.save
       name = post.category.name
       render json:{ post: post, name: name }
+    else
+      judge = false
+      message = post.errors.full_messages
+      render json:{ judge: judge, message: message }
     end
 
   end
