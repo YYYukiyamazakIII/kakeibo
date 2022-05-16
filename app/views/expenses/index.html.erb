@@ -7,34 +7,49 @@
     <title>expenses-index</title>
   </head>
   <body>
-    <%= month_calendar do |date| %>
-      <% @daily_value = 0 %>
-      <% @expenses.where(date:date).each do |expense| %>
-        <% @daily_value += expense.value %>
-      <% end %>
-      <%= date.day %>
-      <div class= "calendar-box">
-        <%= link_to "#{@daily_value}円", new_expense_path(date) %>
-      </div>
-    <% end %>
-    <div class="lower-content">
-      <div class="total_value">
-        合計金額：<%= @total_value %>円
-      </div>
-      <% @category_count.times do |i| %>
-        <% @category_value = 0 %>
-        <% @category_name = '' %>
-        <% i += 1 %>
-        <% @expenses.where(category_id:i).each do |expense| %>
-          <% @category_value += expense.value %>
-          <% @category_name = expense.category.name %>
-        <% end %>
-        <% unless @category_name == '' %>
-          <div class="category_value">
-            <%= @category_name %>：<%= @category_value %>円
+    <div class="index-contents">
+      <div class="calendar">
+        <%= month_calendar do |date| %>
+          <% @daily_value = 0 %>
+          <% @expenses.where(date:date).each do |expense| %>
+            <% @daily_value += expense.value %>
+          <% end %>
+          <%= date.day %>
+          <div class= "calendar-box">
+            <%= link_to "#{@daily_value}円", new_expense_path(date) %>
           </div>
         <% end %>
-      <% end %>
+      </div>
+      <div class="month-list">
+        <div class="month-list-title">
+        カテゴリ別金額
+        </div>
+        <div class="month-lists">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>合計金額</td>
+              <td><%= @total_value %>円</td>
+            </tr>
+            <% @category_count.times do |i| %>
+              <% @category_value = 0 %>
+              <% @category_name = '' %>
+              <% i += 1 %>
+              <% @expenses.where(category_id:i).each do |expense| %>
+                <% @category_value += expense.value %>
+                <% @category_name = expense.category.name %>
+              <% end %>
+              <% unless @category_name == '' %>
+                <tr>
+                  <td><%= @category_name %></td>
+                  <td><%= @category_value %>円</td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+        </div>
+      </div>
     </div>
   </body>
 </html>

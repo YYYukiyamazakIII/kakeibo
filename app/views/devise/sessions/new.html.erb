@@ -2,27 +2,24 @@
   ログイン
 </div>
 <%= form_with model: @user, url: user_session_path, class:"registrations-form", local: true do |f| %>
+
   <div>
     <%= flash[:notice] %>
     <%= flash[:alert] %>
   </div>
+
   <div class="field">
-  <div class="mb-3">
-    <%= f.label "メールアドレス" %>
-    <%= f.text_field :email, class:"form-control" %>
+    <div class="mb-3">
+      <%= f.label "メールアドレス" %>
+      <%= f.text_field :email, class:"form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label "パスワード" %>
+     <%= f.password_field :password, class:"form-control" %>
+    </div>
+    <div class="col-12">
+      <%= f.submit "ログイン", class:"btn btn-primary" %>
+    </div>
   </div>
-
-  <div class="mb-3">
-    <%= f.label "パスワード" %>
-    <%= f.password_field :password, class:"form-control" %>
-  </div>
-  <div class="mb-3">
-    <%= f.label "パスワード(確認)" %>
-    <%= f.password_field :password_confirmation, class:"form-control" %>
-  </div>
-
-  <div class="col-12">
-    <%= f.submit "ログイン", class:"btn btn-primary" %>
-  </div>
-
+  
 <% end %>

@@ -9,22 +9,33 @@
   padding: 20px 0;
 }
 
-.total-price{
+#total-value-space{
   display: flex;
   justify-content: center;
   font-size: 25px;
-
-}
-
-.main-contents{
-  height: 70vh;
-  overflow: scroll;
 }
 
 .lower-contents{
-  height: 10vh;
-  background-color: lightgrey;
   display: flex;
-  align-items: center;
-  padding-left: 20px;
+}
+
+.list-contents{
+  height: 70vh;
+  width: 80vw;
+  overflow: scroll;
+}
+
+.form-contents{
+  height: 70vh;
+  width: 20vw;
+  background-color: lightgrey;
+  padding: 30px 20px;
+}
+
+.form-list{
+  margin-bottom: 30px;
+}
+
+.form-submit{
+  text-align: center;
 }

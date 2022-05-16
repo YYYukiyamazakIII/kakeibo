@@ -6,3 +6,7 @@ ja:
         prefecture_id: 都道府県
         city: 市区町村
         profile: プロフィール
+      expense:
+        name: 名前
+        value: 値段
+        category_id: カテゴリ
