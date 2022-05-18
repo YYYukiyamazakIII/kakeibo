@@ -1,0 +1,22 @@
+<%= form_with(url: search_tweets_path, local: true, method: :get, class:"search-form") do |f| %>
+  <%= f.text_field :keyword, placeholder: "投稿を検索する",class:"form-control", id:"search-text" %>
+  <%= f.submit "検索", class:"btn btn-primary", id:"search-submit" %>
+<% end %>
+
+<div class="tweets-list">
+  <% @tweets.each do |tweet| %>
+    <div class="card", id="tweet-box">
+      <div class="card-body">
+        <div class="user-name-time">
+          <h5 class="card-title"><%= tweet.user.name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= tweet.created_at.to_s.slice(0..18) %></h6>
+        </div>
+        <p class="card-text"><%= tweet.text %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="fixed-bottom", id="tweet-create-link">
+  <%= link_to "投稿する", new_tweet_path, class:"btn btn-info", id:"tweet-create-button" %>
+</div>

@@ -1,0 +1,9 @@
+<div class="tweet-create-form">
+  <%= form_with model:@tweet, local:true do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+    <div class="mb-3">
+      <%= f.text_area :text, class:"form-control", id:"exampleFormControlTextarea1", rows:"5" %>
+    </div>
+    <%= f.submit "投稿する", class:"btn btn-primary" %>
+  <% end %>
+</div>

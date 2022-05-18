@@ -1,0 +1,40 @@
+.search-form{
+  height: 14vh;
+  display: flex;
+  align-items: center;
+  padding: 0 400px;
+}
+
+#search-text{
+  margin-right: 15px;
+}
+
+#search-submit{
+  margin-left: 15px;
+}
+
+.tweets-list{
+  overflow: scroll;
+  height: 80vh;
+  padding: 20px 0;
+}
+
+#tweet-box{
+  width: 600px;
+  margin: 20px auto;
+}
+
+.user-name-time{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#tweet-create-link{
+  text-align: right;
+  margin: 60px 60px;
+}
+
+#tweet-create-button{
+  font-size: 25px;
+}

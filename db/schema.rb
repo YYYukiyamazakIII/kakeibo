@@ -10,33 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_512_222_644) do
-  create_table 'expenses', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.string 'name', null: false
-    t.integer 'value', null: false
-    t.integer 'category_id', null: false
-    t.string 'date', null: false
-    t.bigint 'user_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['user_id'], name: 'index_expenses_on_user_id'
+ActiveRecord::Schema.define(version: 2022_05_16_212610) do
+
+  create_table "expenses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "value", null: false
+    t.integer "category_id", null: false
+    t.string "date", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
-  create_table 'users', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.string 'name', null: false
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.integer 'prefecture_id'
-    t.string 'city'
-    t.text 'profile'
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+  create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "text", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
-  add_foreign_key 'expenses', 'users'
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.integer "prefecture_id"
+    t.string "city"
+    t.text "profile"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "expenses", "users"
+  add_foreign_key "tweets", "users"
 end
