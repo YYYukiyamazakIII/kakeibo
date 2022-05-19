@@ -4,6 +4,11 @@
     <div class="mb-3">
       <%= f.text_area :text, class:"form-control", id:"exampleFormControlTextarea1", rows:"5" %>
     </div>
-    <%= f.submit "投稿する", class:"btn btn-primary" %>
+    <div class="mb-3">
+      <%= f.file_field :image %>
+    </div>
+    <div class="mb-3">
+      <%= f.submit "投稿する", class:"btn btn-primary" %>
+    </div>
   <% end %>
 </div>
