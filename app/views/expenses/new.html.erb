@@ -37,7 +37,16 @@
                 <td><%= expense.name  %></td>
                 <td><%= expense.category.name %></td>
                 <td name="expense-value"><%= expense.value %></td>
-                <td>編集 / 削除</td>
+                <td>
+                  <div class="edit-destroy-form">
+                    <%= form_with url: "/expenses/#{expense.id}/edit", method: :get, class:"edit-form", local: true do |f| %>
+                      <%= f.submit "編集" ,class:"btn btn-outline-secondary" %>
+                    <% end %>
+                    <%= form_with url: "/expenses/#{expense.id}",class:"destroy-form", method: :delete, local: true do |f| %>
+                      <%= f.submit "削除" ,class:"btn btn-outline-secondary", name:"destroy-submit" %>
+                    <% end %>
+                  </div>
+                </td>
               </tr>
             <% end %>
           </tbody>

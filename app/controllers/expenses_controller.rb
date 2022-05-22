@@ -31,7 +31,19 @@ class ExpensesController < ApplicationController
       message = post.errors.full_messages
       render json:{ judge: judge, message: message }
     end
+  end
 
+  def edit
+    binding.pry
+  end
+
+  def destroy
+    expense = Expense.find(params[:id])
+    if expense.user_id == current_user.id
+      Expense.destroy(params[:id])
+      text = "削除しました"
+      render json:{ text:text }
+    end
   end
 
   private

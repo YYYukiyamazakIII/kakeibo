@@ -36,6 +36,20 @@
   margin-bottom: 30px;
 }
 
+.edit-destroy-form{
+  display: flex;
+  justify-content: center;
+}
+
+
+.destroy-form{
+  margin-left: 20px;
+}
+
 .form-submit{
+  text-align: center;
+}
+
+.create-message{
   text-align: center;
 }
