@@ -34,7 +34,22 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    binding.pry
+    expense = Expense.find(params[:id])
+    render json:{ expense: expense }
+  end
+
+  def update
+    expense = Expense.find(params[:id])
+    if expense.user_id == current_user.id
+      if  expense.update(expense_params)
+        name = expense.category.name
+        render json:{ update: expense, name: name }
+      else
+        judge = false
+        message = expense.errors.full_messages
+        render json:{ judge: judge, message: message }
+      end
+    end
   end
 
   def destroy

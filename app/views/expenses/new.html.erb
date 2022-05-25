@@ -40,7 +40,7 @@
                 <td>
                   <div class="edit-destroy-form">
                     <%= form_with url: "/expenses/#{expense.id}/edit", method: :get, class:"edit-form", local: true do |f| %>
-                      <%= f.submit "編集" ,class:"btn btn-outline-secondary" %>
+                      <%= f.submit "編集" ,class:"btn btn-outline-secondary", name:"get-submit" %>
                     <% end %>
                     <%= form_with url: "/expenses/#{expense.id}",class:"destroy-form", method: :delete, local: true do |f| %>
                       <%= f.submit "削除" ,class:"btn btn-outline-secondary", name:"destroy-submit" %>
