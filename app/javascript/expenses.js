@@ -72,33 +72,34 @@ function edit (editSubmit, expense){
   const submit = document.getElementById("edit-submit");
   submit.addEventListener("click", (e)=>{
     e.preventDefault();
-    const form = document.getElementById("expense-form");
-    const formData = new FormData(form);
-    const XHR = new XMLHttpRequest();
-    XHR.open("PATCH", `/expenses/${expense.id}`, true);
-    XHR.responseType = "json";
-    XHR.send(formData);
-    XHR.onload = () => {
-      if(XHR.response.judge == false){
-        XHR.response.message.forEach(function(message){
-        alert(message)
-        })
-        XHR.response.message = null;
-        console.log(XHR.response.message )
-        return null;
+    if (editSubmit.parentNode.parentNode.parentNode.parentNode){
+      const form = document.getElementById("expense-form");
+      const formData = new FormData(form);
+      const XHR = new XMLHttpRequest();
+      XHR.open("PATCH", `/expenses/${expense.id}`, true);
+      XHR.responseType = "json";
+      XHR.send(formData);
+      XHR.onload = () => {
+        if(XHR.response.judge == false){
+          XHR.response.message.forEach(function(message){
+          alert(message)
+          })
+          XHR.response.message = null;
+          return null;
+        };
+        const formName = document.getElementById("form-name");
+        const formValue = document.getElementById("form-value");
+        const formCategoryId = document.getElementById("form-category_id")
+        editSubmit.parentNode.parentNode.parentNode.parentNode.innerHTML = updateHTML(XHR);
+        calc();
+        formName.value = "";
+        formValue.value = "";
+        formCategoryId.value = "1";
+        const expenseSubmit = document.getElementById("edit-submit")
+        expenseSubmit.id = "expense-submit"
+        expenseSubmit.value = "登録"
       };
-      const formName = document.getElementById("form-name");
-      const formValue = document.getElementById("form-value");
-      const formCategoryId = document.getElementById("form-category_id")
-      editSubmit.parentNode.parentNode.parentNode.parentNode.innerHTML = updateHTML(XHR);
-      calc();
-      formName.value = "";
-      formValue.value = "";
-      formCategoryId.value = "";
-      const expenseSubmit = document.getElementById("edit-submit")
-      expenseSubmit.id = "expense-submit"
-      expenseSubmit.value = "登録"
-    };
+    }
   });
 }
 
