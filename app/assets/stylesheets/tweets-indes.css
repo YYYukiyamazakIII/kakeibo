@@ -24,10 +24,19 @@
   margin: 20px auto;
 }
 
-.user-name-time{
+.card-upper-content{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.user-name-time{
+  display: flex;
+  align-items: center;
+}
+
+#user-time{
+  margin-left: 15px;
 }
 
 #tweet-create-link{
