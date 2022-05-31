@@ -23,7 +23,7 @@
       </div>
       <% if user_signed_in? %>
         <div class="my-page">
-          <%= current_user.name %>
+          <%= link_to "マイページ", user_path(current_user.id) %>
         </div>
         <div class="logout">
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
