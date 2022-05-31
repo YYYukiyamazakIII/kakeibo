@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="user-name-time">
       <h5 class="card-title"><%= @tweet.user.name %></h5>
-      <h6 class="card-subtitle mb-2 text-muted"><%= @tweet.created_at.to_s.slice(0..18) %></h6>
+      <h6 class="card-subtitle mb-2 text-muted", id="show-user-time"><%= @tweet.created_at.to_s.slice(0..18) %></h6>
     </div>
     <%= image_tag @tweet.image, class:"card-img-top" if @tweet.image.attached? %>
     <p class="card-text"><%= @tweet.text %></p>
