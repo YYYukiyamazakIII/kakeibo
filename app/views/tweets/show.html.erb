@@ -9,6 +9,30 @@
   </div>
 </div>
 
-<div class="comment-content">
-  <h3>コメント一覧</h1>
+<div class="comments-content">
+  <h3>コメント一覧</h3>
+  <div id="comment-list">
+    <% @comments.each do |comment| %>
+      <div class="comment-content">
+        <div class="comment-upper-content">
+          <div class="comment-user-name">
+            <%= comment.user.name %>
+          </div>
+          <div class="comment-created_at">
+            <%= comment.created_at.to_s.slice(0..18) %>
+          </div>
+        </div>
+        <div class="comment-lower-content">
+          <%= comment.text %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="mb-3", id="comment-form">
+    <input type="hidden", id="tweet_id", value=<%=@tweet.id%>>
+    <%= form_with model:[@tweet, @comment], id:"comment-create-form" do |f| %>
+      <%= f.text_field :text, class:"form-control", id:"exampleFormControlInput1" %>
+      <%= f.submit "コメントする", class:"btn btn-primary", id:"comment-form-submit" %>
+    <% end %>
+  </div>
 </div>

@@ -1,77 +1,65 @@
-<!doctype html>
-<html lang="ja">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="expense-new.css">
-    <title>expenses-new</title>
-  </head>
-  <body>
-    <div class="upper-contents">
-      <div class="month">
-        <div>前の日</div>
-        <div><%=@date.slice(5..6).to_i%>月<%=@date.slice(-2..-1)%>日</div>
-        <div>次の日</div>
-      </div>
-      <div id="total-value-space">
-      </div>
-    </div>
-    <div class="lower-contents">
-      <div class="list-contents">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th></th>
-              <th scope="col">名前</th>
-              <th scope="col">カテゴリ</th>
-              <th scope="col">値段</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="list">
-            <% @expenses.each do |expense| %>
-              <tr>
-                <td></td>
-                <td><%= expense.name  %></td>
-                <td><%= expense.category.name %></td>
-                <td name="expense-value"><%= expense.value %></td>
-                <td>
-                  <div class="edit-destroy-form">
-                    <%= form_with url: "/expenses/#{expense.id}/edit", method: :get, class:"edit-form", local: true do |f| %>
-                      <%= f.submit "編集" ,class:"btn btn-outline-secondary", name:"get-submit" %>
-                    <% end %>
-                    <%= form_with url: "/expenses/#{expense.id}",class:"destroy-form", method: :delete, local: true do |f| %>
-                      <%= f.submit "削除" ,class:"btn btn-outline-secondary", name:"destroy-submit" %>
-                    <% end %>
-                  </div>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="form-contents">
-        <%= form_with(model:@expense, id:"expense-form", local:true) do |f| %>
-          <%= f.hidden_field :date, value: @date, id:"form-date" %>
-          <div class="form-list">
-            <%= f.label :name, "名前" %>
-            <%= f.text_field :name, class:"form-control", id:"form-name" %>
-          </div>
-          <div class="form-list">
-            <%= f.label :value, "値段" %>
-            <%= f.text_field :value, class:"form-control", id:"form-value" %>
-          </div class="form-list">
-          <div class="form-list">
-            <%= f.label :value, "カテゴリ" %>
-            <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"form-control", id:"form-category_id"}) %>
-          </div>
-          <div class="form-submit">
-            <%= f.submit "登録", class:"btn btn-primary", id:"expense-submit"%>
-          </div>
+<div class="upper-contents">
+  <div class="month">
+    <div>前の日</div>
+    <div><%=@date.slice(5..6).to_i%>月<%=@date.slice(-2..-1)%>日</div>
+    <div>次の日</div>
+  </div>
+  <div id="total-value-space">
+  </div>
+</div>
+<div class="lower-contents">
+  <div class="list-contents">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th scope="col">名前</th>
+          <th scope="col">カテゴリ</th>
+          <th scope="col">値段</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="list">
+        <% @expenses.each do |expense| %>
+          <tr>
+            <td></td>
+            <td><%= expense.name  %></td>
+            <td><%= expense.category.name %></td>
+            <td name="expense-value"><%= expense.value %></td>
+            <td>
+              <div class="edit-destroy-form">
+                <%= form_with url: "/expenses/#{expense.id}/edit", method: :get, class:"edit-form", local: true do |f| %>
+                  <%= f.submit "編集" ,class:"btn btn-outline-secondary", name:"get-submit" %>
+                <% end %>
+                <%= form_with url: "/expenses/#{expense.id}",class:"destroy-form", method: :delete, local: true do |f| %>
+                  <%= f.submit "削除" ,class:"btn btn-outline-secondary", name:"destroy-submit" %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
         <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="form-contents">
+    <%= form_with(model:@expense, id:"expense-form", local:true) do |f| %>
+      <%= f.hidden_field :date, value: @date, id:"form-date" %>
+      <div class="form-list">
+        <%= f.label :name, "名前" %>
+        <%= f.text_field :name, class:"form-control", id:"form-name" %>
       </div>
-    </div>
-  </body>
-</html>
+      <div class="form-list">
+        <%= f.label :value, "値段" %>
+        <%= f.text_field :value, class:"form-control", id:"form-value" %>
+      </div class="form-list">
+      <div class="form-list">
+        <%= f.label :value, "カテゴリ" %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"form-control", id:"form-category_id"}) %>
+      </div>
+      <div class="form-submit">
+        <%= f.submit "登録", class:"btn btn-primary", id:"expense-submit"%>
+      </div>
+    <% end %>
+  </div>
+</div>
+ 

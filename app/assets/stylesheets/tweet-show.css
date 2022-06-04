@@ -5,3 +5,33 @@
 #show-user-time{
   margin-left: 15px;
 }
+
+.comments-content{
+  background-color: whitesmoke;
+  width: 598px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 15px 15px;
+}
+
+.comment-content{
+  margin: 15px 0;
+}
+
+.comment-upper-content{
+  display: flex;
+}
+
+.comment-created_at{
+  margin-left: 15px;
+  color: gray;
+}
+
+.comment-lower-content{
+  display: flex;
+  justify-content: flex-start;
+}
+
+#comment-form-submit{
+  margin-top: 15px;
+}

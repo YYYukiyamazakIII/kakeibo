@@ -18,7 +18,7 @@
             ▼
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><%= link_to "コメント一覧", tweet_path(tweet.id) %></li>
+              <li><%= link_to "コメント一覧", tweet_path(tweet.id), local: true %></li>
               <% if tweet.user_id == current_user.id %>
                 <li><%= link_to "編集", edit_tweet_path(tweet.id) %></li>
                 <li><%= link_to "削除", tweet_path(tweet.id), method: :delete %></li>

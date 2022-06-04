@@ -42,6 +42,8 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
+    @comment = Comment.new
+    @comments = Comment.where(tweet_id: params[:id]).includes(:user).order('created_at DESC')
   end
 
   def tweet_params

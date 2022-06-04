@@ -50,8 +50,6 @@ function post (){
           XHR.response.message.forEach(function(message){
             alert(message)
           })
-          XHR.response.message = null;
-          console.log(XHR.response.message )
           return null;
         };
         const list = document.getElementById("list");
@@ -62,7 +60,7 @@ function post (){
         calc();
         formName.value = "";
         formValue.value = "";
-        formCategoryId.value = "";
+        formCategoryId.value = 1;
       }
     }
   });

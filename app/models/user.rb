@@ -8,6 +8,7 @@ class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
   has_many :tweets
+  has_many :comments
 
   validates :name, :prefecture_id, :city, :profile, presence: true
   validates :prefecture_id, numericality: { other_than: 1, message: 'を入力してください' }
