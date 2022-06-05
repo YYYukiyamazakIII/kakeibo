@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.includes(:user).order('created_at DESC')
+    @tweets = Tweet.includes(:user, :comments, :good_tweets).order('created_at DESC')
+    @good_tweet = GoodTweet.new
   end
 
   def new

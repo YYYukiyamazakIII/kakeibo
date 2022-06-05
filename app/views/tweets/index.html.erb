@@ -13,21 +13,28 @@
             <h5 class="card-title"><%= tweet.user.name %></h5>
             <h6 class="card-subtitle mb-2 text-muted", id="user-time"><%= tweet.created_at.to_s.slice(0..18) %></h6>
           </div>
-          <div class="dropdown">
-            <button class="btn btn-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            ▼
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><%= link_to "コメント一覧", tweet_path(tweet.id), local: true %></li>
-              <% if tweet.user_id == current_user.id %>
-                <li><%= link_to "編集", edit_tweet_path(tweet.id) %></li>
-                <li><%= link_to "削除", tweet_path(tweet.id), method: :delete %></li>
-              <% end %>
-            </ul>
-          </div>
+          <% if tweet.user_id == current_user.id %>
+            <div class="dropdown">
+              <button class="btn btn-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              ▼
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><%= link_to "編集", edit_tweet_path(tweet.id) %></li>
+                  <li><%= link_to "削除", tweet_path(tweet.id), method: :delete %></li>
+              </ul>
+            </div>
+          <% end %>
         </div>
         <%= image_tag tweet.image, class:"card-img-top" if tweet.image.attached? %>
         <p class="card-text"><%= tweet.text %></p>
+        <div class="card-lower-content">
+          <%= form_with model:[tweet, @good_tweet] do |f| %>
+            <%= f.submit "いいね #{tweet.good_tweets.count}", class:"btn btn-outline-warning", name:"good-items-button" %>
+          <% end %>
+          <div class="card-comment">
+            <%= link_to "コメント #{tweet.comments.count}件", tweet_path(tweet.id), class:"btn btn-outline-info", local: true %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

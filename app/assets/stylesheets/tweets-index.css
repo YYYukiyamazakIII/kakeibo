@@ -47,3 +47,11 @@
 #tweet-create-button{
   font-size: 25px;
 }
+
+.card-lower-content{
+  display: flex;
+}
+
+.card-comment{
+  margin-left: 10px;
+}

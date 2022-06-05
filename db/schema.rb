@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 2022_06_05_044711) do
     t.string "name", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.integer "prefecture_id"
-    t.string "city"
+    t.integer "prefecture_id", null: false
+    t.string "city", null: false
     t.text "profile"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

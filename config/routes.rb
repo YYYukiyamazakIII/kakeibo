@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :expenses, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :tweets do
     resources :comments, only: [:create, :destroy]
-    resources :good_tweets, only: :create
+    resources :good_tweets, only: [:create, :destroy]
     collection do
       get 'search'
     end
