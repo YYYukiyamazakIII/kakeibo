@@ -5,4 +5,12 @@ class Tweet < ApplicationRecord
   has_many :good_tweets, dependent: :destroy
 
   validates :text, presence: true
+
+  def self.search(search)
+    if search != ""
+      Tweet.where('text LIKE(?)', "%#{search}%")
+    else
+      Tweet.ApplicationController
+    end
+  end
 end

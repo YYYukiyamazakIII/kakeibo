@@ -47,6 +47,11 @@ class TweetsController < ApplicationController
     @comments = Comment.where(tweet_id: params[:id]).includes(:user).order('created_at DESC')
   end
 
+  def search
+    @tweets = Tweet.search(params[:keyword])
+    @good_tweet = GoodTweet.new
+  end
+
   def tweet_params
     params.require(:tweet).permit(:text, :image).merge(user_id: current_user.id)
   end
