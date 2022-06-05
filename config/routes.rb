@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: 'expenses#index'
   resources :expenses, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :tweets do
-    resources :comments, only: :create
+    resources :comments, only: [:create, :destroy]
+    resources :good_tweets, only: :create
     collection do
       get 'search'
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_31_210844) do
+ActiveRecord::Schema.define(version: 2022_06_05_044711) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 2022_05_31_210844) do
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
+  create_table "good_tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "tweet_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tweet_id"], name: "index_good_tweets_on_tweet_id"
+    t.index ["user_id"], name: "index_good_tweets_on_user_id"
+  end
+
   create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text", null: false
     t.bigint "user_id", null: false
@@ -82,5 +91,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_210844) do
   add_foreign_key "comments", "tweets"
   add_foreign_key "comments", "users"
   add_foreign_key "expenses", "users"
+  add_foreign_key "good_tweets", "tweets"
+  add_foreign_key "good_tweets", "users"
   add_foreign_key "tweets", "users"
 end

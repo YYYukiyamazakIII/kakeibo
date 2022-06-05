@@ -29,7 +29,15 @@
 
 .comment-lower-content{
   display: flex;
-  justify-content: flex-start;
+}
+
+.comment-text{
+  width: 80%;
+  text-align: left;
+}
+
+.comment-destroy-button{
+  width: 20%;
 }
 
 #comment-form-submit{

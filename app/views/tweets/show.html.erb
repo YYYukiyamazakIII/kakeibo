@@ -23,7 +23,16 @@
           </div>
         </div>
         <div class="comment-lower-content">
-          <%= comment.text %>
+          <div class="comment-text">
+            <%= comment.text %>
+          </div>
+          <div class="comment-destroy-button">
+            <% if comment.user_id == current_user.id%>
+              <%= form_with url: "/tweets/#{@tweet.id}/comments/#{comment.id}", method: :delete do |f| %>
+                <%= f.submit "削除", class:"btn btn-outline-secondary", name:"comment-destroy-submit" %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>

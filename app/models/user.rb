@@ -9,6 +9,7 @@ class User < ApplicationRecord
   belongs_to :prefecture
   has_many :tweets
   has_many :comments
+  has_many :good_tweets
 
   validates :name, :prefecture_id, :city, :profile, presence: true
   validates :prefecture_id, numericality: { other_than: 1, message: 'を入力してください' }

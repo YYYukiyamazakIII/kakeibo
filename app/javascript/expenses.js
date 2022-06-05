@@ -28,12 +28,6 @@ const updateHTML = (XHR) => {
   return html;
 };
 
-const deleteHTML = (XHR) => {
-  const message = XHR.response.text
-  const html = ``;
-  return html;
-};
-
 function post (){
   const submit = document.getElementById("expense-submit")
   submit.addEventListener("click", (e)=>{
@@ -124,10 +118,9 @@ function destroy (){
       const formData = new FormData(form);
       const XHR = new XMLHttpRequest();
       XHR.open("DELETE", form.action, true);
-      XHR.responseType = "json";
       XHR.send(formData);
       XHR.onload = () => {
-        submit.form.parentNode.parentNode.parentNode.innerHTML = deleteHTML(XHR);
+        submit.form.parentNode.parentNode.parentNode.innerHTML = "";
         calc();
       };
     });

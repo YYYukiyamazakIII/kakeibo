@@ -55,9 +55,7 @@ class ExpensesController < ApplicationController
   def destroy
     expense = Expense.find(params[:id])
     if expense.user_id == current_user.id
-      Expense.destroy(params[:id])
-      text = "削除しました"
-      render json:{ text:text }
+      expense.destroy
     end
   end
 

@@ -29,7 +29,7 @@
 - has_many :expenses
 - has_many :tweets
 - has_many :comments
-- has_many :nices
+- has_many :good_tweets
 
 ## tweets テーブル
 
@@ -42,7 +42,7 @@
 
 - belongs_to :user
 - has_many :comments
-- has_many :nices
+- has_many :good_tweets
 
 ## comments テーブル
 
@@ -57,7 +57,7 @@
 - belongs_to :user
 - belongs_to :tweet
 
-## nices テーブル
+## good_tweets テーブル
 
 | Colum    | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |

@@ -1,18 +1,22 @@
 const buildHTML = (XHR) => {
   const html = `
-    <div class="comment-content">
-      <div class="comment-upper-content">
-        <div class="comment-user-name">
-          ${XHR.response.name}
-        </div>
-        <div class="comment-created_at">
-          ${XHR.response.time}
-        </div>
+  <div class="comment-content">
+    <div class="comment-upper-content">
+      <div class="comment-user-name">
+      ${XHR.response.name}
       </div>
-      <div class="comment-lower-content">
-        ${XHR.response.text}
+      <div class="comment-created_at">
+      ${XHR.response.time}
       </div>
-    </div>`;
+    </div>
+    <div class="comment-lower-content">
+      <div class="comment-text">
+      ${XHR.response.text}
+      </div>
+      <div class="comment-destroy-button">
+      </div>
+    </div>
+  </div>`;
   return html;
 };
 
@@ -42,4 +46,22 @@ function commentCreate (){
   });
 };
 
+function commentDestroy (){
+  const submits = document.getElementsByName("comment-destroy-submit")
+  submits.forEach(function(submit){
+    submit.addEventListener("click",(e)=>{
+      e.preventDefault();
+      const form = submit.form
+      const formData = new FormData(form);
+      const XHR = new XMLHttpRequest();
+      XHR.open("DELETE", form.action, true);
+      XHR.send(formData);
+      XHR.onload = () => {
+        submit.form.parentNode.parentNode.parentNode.innerHTML = "";
+      };
+    });
+  })
+};
+
 window.addEventListener('load', commentCreate);
+window.addEventListener('load', commentDestroy);
