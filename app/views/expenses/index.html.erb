@@ -1,55 +1,50 @@
+<div class="index-container">
 
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="expense-index.css">
-    <title>expenses-index</title>
-  </head>
-  <body>
-    <div class="index-contents">
-      <div class="calendar">
-        <%= month_calendar do |date| %>
-          <% @daily_value = 0 %>
-          <% @expenses.where(date:date).each do |expense| %>
-            <% @daily_value += expense.value %>
-          <% end %>
-          <%= date.day %>
-          <div class= "calendar-box">
-            <%= link_to "#{@daily_value}円", new_expense_path(date) %>
-          </div>
+  <%# カレンダーの部分 %>
+  <div class="calendar-outer">
+    <%= month_calendar do |date| %>
+      <% a_day_expense = 0 %>
+      <% @expenses.each do |expense| %>
+        <% if expense.date == date.to_s %>
+          <% a_day_expense += expense.value %>
         <% end %>
+      <% end %>
+      <%= date.day %>
+      <div class= "calendar-inner">
+        <%= link_to "#{a_day_expense}円", new_expense_path(date) %>
       </div>
-      <div class="month-list">
-        <div class="month-list-title">
-        カテゴリ別金額
-        </div>
-        <div class="month-lists">
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <td>合計金額</td>
-              <td><%= @total_value %>円</td>
-            </tr>
-            <% @category_count.times do |i| %>
-              <% @category_value = 0 %>
-              <% @category_name = '' %>
-              <% i += 1 %>
-              <% @expenses.where(category_id:i).each do |expense| %>
-                <% @category_value += expense.value %>
-                <% @category_name = expense.category.name %>
-              <% end %>
-              <% unless @category_name == '' %>
-                <tr>
-                  <td><%= @category_name %></td>
-                  <td><%= @category_value %>円</td>
-                </tr>
+    <% end %>
+  </div>
+
+  <%# カテゴリ別金額の部分 %>
+  <div class="categorized-expenses-list-outer">
+    <div class="categorized-expenses-list-title">
+      カテゴリ別金額
+    </div>
+    <div class="categorized-expenses-list-inner">
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td>合計金額</td>
+            <td><%= @total_expense %>円</td>
+          </tr>
+          <% @category.each do |category| %>
+            <% categorized_expense = 0 %>
+            <% @expenses.each do |expense| %>
+              <% if expense.category_id == category.id %>
+                <% categorized_expense += expense.value %>
               <% end %>
             <% end %>
-          </tbody>
-        </table>
-        </div>
-      </div>
+            <% if categorized_expense != 0 %>
+              <tr>
+                <td><%= category.name %></td>
+                <td><%= categorized_expense %>円</td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-  </body>
-</html>
+  </div>
+
+</div>

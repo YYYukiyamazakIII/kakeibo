@@ -1,9 +1,12 @@
-.index-contents{
+.index-container{
   display: flex;
+  height: 94vh;
+  width: 100vw;
+  padding-top: 40px;
 }
 
-.calendar{
-  width: 75vw;
+.calendar-outer{
+  width: 75%;
   padding: 0 10px;
 }
 
@@ -11,29 +14,26 @@
   font-size: 30px;
 }
 
-.calendar-box{
-  margin-top: 25px;
+.calendar-inner{
+  margin-top: 60px;
   font-size: 18px;
   display: flex;
   justify-content: flex-end;
 }
 
-.month-list{
-  width: 25vw;
-  padding: 0 10px;
-  font-size: 20px;
+.categorized-expenses-list-outer{
+  width: 25%;
+  padding: 0 10px 25px 10px ;
+  font-size: 18px;
 }
 
-.month-list-title{
+.categorized-expenses-list-title{
+  padding-top: 30px;
+  height: 10%;
   text-align: center;
-  padding: 50px 0 10px 0;
 }
 
-.month-lists{
-  height: 530px;
+.categorized-expenses-list-inner{
+  height: 90%;
   overflow: scroll;
-}
-
-.category_value{
-  margin: 10px 0;
 }
