@@ -1,55 +1,54 @@
-.upper-contents{
-  height: 20vh;
+.expense-new-container{
+  height: 94vh;
+  width: 100vw;
 }
 
-.month{
-  display: flex;
-  justify-content: space-around;
+.expense-new-upper-container{
+  height: 20%;
   font-size: 25px;
+  text-align: center;
+}
+
+.expense-new-date{
   padding: 20px 0;
 }
 
-#total-value-space{
+.expense-new-lower-container{
+  height: 80%;
   display: flex;
-  justify-content: center;
-  font-size: 25px;
+  padding: 0 10px 10px 10px;
 }
 
-.lower-contents{
-  display: flex;
-}
-
-.list-contents{
-  height: 70vh;
-  width: 80vw;
+.registered-expenses-list{
+  height: 100%;
+  width: 80%;
   overflow: scroll;
 }
 
-.form-contents{
-  height: 70vh;
-  width: 20vw;
-  background-color: lightgrey;
-  padding: 30px 20px;
-}
-
-.form-list{
-  margin-bottom: 30px;
-}
-
-.edit-destroy-form{
+.expense-edit-destroy-forms{
   display: flex;
   justify-content: center;
 }
 
-
-.destroy-form{
+.expense-destroy-form{
   margin-left: 20px;
+}
+
+.register-expense-form{
+  height: 100%;
+  width: 20%;
+  padding: 30px 20px;
+  background-color: lightgrey;
+}
+
+.form-input{
+  margin-bottom: 30px;
 }
 
 .form-submit{
   text-align: center;
 }
 
-.create-message{
+.post-message{
   text-align: center;
 }

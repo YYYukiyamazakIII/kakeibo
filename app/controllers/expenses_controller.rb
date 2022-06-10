@@ -12,14 +12,11 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    post = Expense.new(expense_params)
-    if post.save
-      name = post.category.name
-      render json:{ post: post, name: name }
+    expense = Expense.new(expense_params)
+    if expense.save
+      render json:{ expense: expense, categoryName: expense.category.name }
     else
-      judge = false
-      message = post.errors.full_messages
-      render json:{ judge: judge, message: message }
+      render json:{ judge: "false", message: expense.errors.full_messages }
     end
   end
 
