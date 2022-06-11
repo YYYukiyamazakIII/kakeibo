@@ -1,5 +1,5 @@
 function create(){
-  const submits = document.getElementsByName("good-items-button")
+  const submits = document.getElementsByName("good-tweet-submit")
   submits.forEach(function(submit){
     submit.addEventListener('click',(e)=>{
       e.preventDefault();
@@ -10,10 +10,8 @@ function create(){
       XHR.responseType = "json";
       XHR.send(formData);
       XHR.onload = () => {
-        if(XHR.response.judge=="false"){
-          XHR.open("DELETE", `/tweets/${XHR.response.tweet_id}/good_tweets/${XHR.response.good_tweet_id}`, true)
-          XHR.responseType = "json";
-          XHR.send(formData);
+        if(XHR.response.judge == "false"){
+          destroy(formData, XHR);
           return;
         }
         submit.value = `いいね ${XHR.response.good_tweet_count}`
@@ -22,6 +20,10 @@ function create(){
   });
 };
 
-
+function destroy(formData, XHR){
+  XHR.open("DELETE", `/tweets/${XHR.response.tweet_id}/good_tweets/${XHR.response.good_tweet_id}`, true)
+  XHR.responseType = "json";
+  XHR.send(formData);
+}
 
 window.addEventListener('load', create)

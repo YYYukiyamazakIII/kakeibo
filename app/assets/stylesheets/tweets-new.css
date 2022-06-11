@@ -1,4 +1,5 @@
 .tweet-create-form{
+  width: 50vw;
+  margin: 40px auto;
   text-align: center;
-  padding: 40px 400px;
 }

@@ -1,38 +1,53 @@
-<%= form_with(url: search_tweets_path, local: true, method: :get, class:"search-form") do |f| %>
-  <%= f.text_field :keyword, placeholder: "投稿を検索する",class:"form-control", id:"search-text" %>
-  <%= f.submit "検索", class:"btn btn-primary", id:"search-submit" %>
-<% end %>
-
+<div class="search-form-outer">
+  <%= form_with url: search_tweets_path, method: :get, class:"search-form-inner", local: true do |f| %>
+    <%= f.text_field :keyword, placeholder: "投稿を検索する",class:"form-control" %>
+    <%= f.submit "検索", class:"btn btn-primary", id:"search-submit" %>
+  <% end %>
+</div>
 
 <div class="tweets-list">
   <% @tweets.each do |tweet| %>
-    <div class="card", id="tweet-box">
-      <div class="card-body">
-        <div class="card-upper-content">
-          <div class="user-name-time">
-            <h5 class="card-title"><%= tweet.user.name %></h5>
-            <h6 class="card-subtitle mb-2 text-muted", id="user-time"><%= tweet.created_at.to_s.slice(0..18) %></h6>
-          </div>
-          <% if tweet.user_id == current_user.id %>
-            <div class="dropdown">
-              <button class="btn btn-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              ▼
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><%= link_to "編集", edit_tweet_path(tweet.id) %></li>
-                  <li><%= link_to "削除", tweet_path(tweet.id), method: :delete %></li>
-              </ul>
+    <div class="tweet-outer">
+      <div class="card">
+        <div class="card-body">
+          <div class="tweet-upper-container">
+            <div class="tweet-userName-date">
+              <div class="card-title">
+                <%= tweet.user.name %>
+              </div>
+              <div class="card-subtitle mb-2 text-muted">
+                <div class="tweet-date">
+                  <%= tweet.created_at.strftime('%Y-%m-%d %H:%M') %>
+                </div>
+              </div>
             </div>
-          <% end %>
-        </div>
-        <%= image_tag tweet.image, class:"card-img-top" if tweet.image.attached? %>
-        <p class="card-text"><%= tweet.text %></p>
-        <div class="card-lower-content">
-          <%= form_with model:[tweet, @good_tweet] do |f| %>
-            <%= f.submit "いいね #{tweet.good_tweets.count}", class:"btn btn-outline-warning", name:"good-items-button" %>
-          <% end %>
-          <div class="card-comment">
-            <%= link_to "コメント #{tweet.comments.count}件", tweet_path(tweet.id), class:"btn btn-outline-info", local: true %>
+            <% if tweet.user_id == current_user.id %>
+              <div class="dropdown">
+                <button class="btn btn-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                ▼
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><%= link_to "編集する", edit_tweet_path(tweet.id) %></li>
+                  <li><%= link_to "削除する", tweet_path(tweet.id), method: :delete %></li>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+          <div class="tweet-middle-container">
+            <div class="tweet-image">
+              <%= image_tag tweet.image, class:"card-img-top" if tweet.image.attached? %>
+            </div>
+            <div class="tweet-text">
+              <%= tweet.text %>
+            </div>
+          </div>
+          <div class="tweet-lower-container">
+            <%= form_with model:[tweet, @good_tweet] do |f| %>
+              <%= f.submit "いいね #{tweet.good_tweets.count}", class:"btn btn-outline-warning", name:"good-tweet-submit" %>
+            <% end %>
+            <div class="tweet-comment-link">
+              <%= link_to "コメント #{tweet.comments.count}件", tweet_path(tweet.id), class:"btn btn-outline-info" %>
+            </div>
           </div>
         </div>
       </div>
@@ -40,8 +55,8 @@
   <% end %>
 </div>
 
-<div class="fixed-bottom", id="tweet-create-link">
-  <%= link_to "投稿する", new_tweet_path, class:"btn btn-info", id:"tweet-create-button" %>
+<div class="fixed-bottom", id="tweet-create-link-outer">
+  <%= link_to "投稿する", new_tweet_path, class:"btn btn-info", id:"tweet-create-link-inner" %>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

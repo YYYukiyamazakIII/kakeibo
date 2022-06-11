@@ -47,7 +47,6 @@ function edit(){
 
 function update (expenses, expense, defaultHTML){
   const submit = document.getElementById("edit-submit");
-  console.log(expenses)
   submit.addEventListener("click", (e)=>{
     e.preventDefault();
     if (!expenses.includes(expense.id)){
@@ -61,7 +60,7 @@ function update (expenses, expense, defaultHTML){
         if(XHR.response.judge == "false"){
           showErrorMessage(XHR)
         };
-        defaultHTML.parentNode.parentNode.parentNode.parentNode.innerHTML = updateHTML(XHR);
+        defaultHTML.parentNode.parentNode.parentNode.parentNode.innerHTML = createHTML(XHR);
         calc();
         resetFormValue();
         changePostSubmit(); 
@@ -113,20 +112,6 @@ const createHTML = (XHR) => {
       <td> ${categoryName} </td>
       <td name="expense-value"> ${expense.value} </td>
       <td class="post-message">登録しました</td>
-    </tr>`;
-  return html;
-};
-
-const updateHTML = (XHR) => {
-  const item = XHR.response.update;
-  const name = XHR.response.name;
-  const html = `
-    <tr>
-      <td></td>
-      <td> ${item.name} </td>
-      <td> ${name} </td>
-      <td name="expense-value"> ${item.value} </td>
-      <td class="post-message">編集しました</td>
     </tr>`;
   return html;
 };

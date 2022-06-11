@@ -3,15 +3,17 @@
   <%# カレンダーの部分 %>
   <div class="calendar-outer">
     <%= month_calendar do |date| %>
+    <%= date.day %>
       <% a_day_expense = 0 %>
       <% @expenses.each do |expense| %>
         <% if expense.date == date.to_s %>
           <% a_day_expense += expense.value %>
         <% end %>
       <% end %>
-      <%= date.day %>
       <div class= "calendar-inner">
+        <% if date.month == @current_month %>
         <%= link_to "#{a_day_expense}円", new_expense_path(date) %>
+        <% end %>
       </div>
     <% end %>
   </div>

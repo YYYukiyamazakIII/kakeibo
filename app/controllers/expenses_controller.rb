@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    @date = params[:format]
+    @date = params[:format].to_date
     @expenses = Expense.where(date: @date, user_id: current_user.id).order('created_at DESC')
     @expense = Expense.new
   end
@@ -21,20 +21,16 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    expense = Expense.find(params[:id])
-    render json:{ expense: expense }
+    render json:{ expense: Expense.find(params[:id]) }
   end
 
   def update
     expense = Expense.find(params[:id])
     if expense.user_id == current_user.id
       if  expense.update(expense_params)
-        name = expense.category.name
-        render json:{ update: expense, name: name }
+        render json:{ expense: expense, categoryName: expense.category.name }
       else
-        judge = false
-        message = expense.errors.full_messages
-        render json:{ judge: judge, message: message }
+        render json:{ judge: "false", message: expense.errors.full_messages }
       end
     end
   end
@@ -53,8 +49,10 @@ class ExpensesController < ApplicationController
     if params[:start_date].nil?
       today = Time.now.to_s
       @expenses = @current_user_expense.where('date like ?', "#{today.slice(0..6)}%")
+      @current_month = Time.now.month
     else
       @expenses = @current_user_expense.where('date like ?', "#{params[:start_date].slice(0..6)}%")
+      @current_month = params[:start_date].slice(5..6).to_i
     end
   end
 

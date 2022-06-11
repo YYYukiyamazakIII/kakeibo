@@ -1,32 +1,53 @@
-<div class="card", id="tweet-box">
-  <div class="card-body">
-    <div class="user-name-time">
-      <h5 class="card-title"><%= @tweet.user.name %></h5>
-      <h6 class="card-subtitle mb-2 text-muted", id="show-user-time"><%= @tweet.created_at.to_s.slice(0..18) %></h6>
+<div class="show-tweet-outer">
+  <div class="card">
+    <div class="card-body">
+      <div class="tweet-upper-container">
+        <div class="tweet-userName-date">
+          <div class="card-title">
+            <%= @tweet.user.name %>
+          </div>
+          <div class="card-subtitle mb-2 text-muted">
+            <div class="tweet-date">
+              <%= @tweet.created_at.strftime('%Y-%m-%d %H:%M') %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tweet-middle-container">
+        <div class="tweet-image">
+          <%= image_tag @tweet.image, class:"card-img-top" if @tweet.image.attached? %>
+        </div>
+        <div class="tweet-text">
+          <%= @tweet.text %>
+        </div>
+      </div>
+      <div class="tweet-lower-container">
+        <%= form_with model:[@tweet, @good_tweet] do |f| %>
+          <%= f.submit "いいね #{@tweet.good_tweets.count}", class:"btn btn-outline-warning", name:"good-tweet-submit" %>
+        <% end %>
+      </div>
     </div>
-    <%= image_tag @tweet.image, class:"card-img-top" if @tweet.image.attached? %>
-    <p class="card-text"><%= @tweet.text %></p>
   </div>
 </div>
 
-<div class="comments-content">
-  <h3>コメント一覧</h3>
-  <div id="comment-list">
+<div class="comment-outer">
+  <h3>コメント</h3>
+  <div id="comments-list">
     <% @comments.each do |comment| %>
-      <div class="comment-content">
-        <div class="comment-upper-content">
+      <div class="comment-inner">
+        <div class="comment-upper-container">
           <div class="comment-user-name">
             <%= comment.user.name %>
           </div>
-          <div class="comment-created_at">
-            <%= comment.created_at.to_s.slice(0..18) %>
+          <div class="comment-date">
+            <%= comment.created_at.strftime('%Y-%m-%d %H:%M') %>
           </div>
         </div>
-        <div class="comment-lower-content">
+        <div class="comment-lower-container">
           <div class="comment-text">
             <%= comment.text %>
           </div>
-          <div class="comment-destroy-button">
+          <div class="comment-destroy-form">
             <% if comment.user_id == current_user.id%>
               <%= form_with url: "/tweets/#{@tweet.id}/comments/#{comment.id}", method: :delete do |f| %>
                 <%= f.submit "削除", class:"btn btn-outline-secondary", name:"comment-destroy-submit" %>

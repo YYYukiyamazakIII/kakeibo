@@ -1,33 +1,30 @@
-.comment-content{
-  text-align: center;
+.show-tweet-outer{
+  width: 50vw;
+  margin: 20px auto;
 }
 
-#show-user-time{
-  margin-left: 15px;
-}
-
-.comments-content{
+.comment-outer{
   background-color: whitesmoke;
-  width: 598px;
+  width: 50vw;
   margin: 0 auto;
   text-align: center;
   padding: 15px 15px;
 }
 
-.comment-content{
+.comment-inner{
   margin: 15px 0;
 }
 
-.comment-upper-content{
+.comment-upper-container{
   display: flex;
 }
 
-.comment-created_at{
+.comment-date{
   margin-left: 15px;
   color: gray;
 }
 
-.comment-lower-content{
+.comment-lower-container{
   display: flex;
 }
 
@@ -36,7 +33,7 @@
   text-align: left;
 }
 
-.comment-destroy-button{
+.comment-destroy-form{
   width: 20%;
 }
 

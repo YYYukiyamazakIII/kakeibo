@@ -3,14 +3,9 @@ class CommentsController < ApplicationController
   def create
     comment = Comment.new(comment_params)
     if comment.save
-      name = comment.user.name
-      time = comment.created_at.to_s.slice(0..18)
-      text = comment.text
-      render json:{ name: name, time: time, text: text }
+      render json:{ name: comment.user.name, date: comment.created_at.strftime('%Y-%m-%d %H:%M'), text: comment.text }
     else
-      judge = false
-      message = comment.errors.full_messages
-      render json:{ judge: judge, message: message }
+      render json:{ judge: "false", message: comment.errors.full_messages }
     end
   end
 

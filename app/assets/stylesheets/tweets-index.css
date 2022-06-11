@@ -1,57 +1,62 @@
-.search-form{
+.search-form-outer{
   height: 14vh;
-  display: flex;
-  align-items: center;
-  padding: 0 400px;
 }
 
-#search-text{
-  margin-right: 15px;
+.search-form-inner{
+  height: 100%;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 #search-submit{
-  margin-left: 15px;
+  margin-left: 30px;
 }
 
 .tweets-list{
   overflow: scroll;
   height: 80vh;
-  padding: 20px 0;
+  width: 50vw;
+  margin: 0 auto;
 }
 
-#tweet-box{
-  width: 600px;
-  margin: 20px auto;
+.tweet-outer{
+  margin: 20px 0;
 }
 
-.card-upper-content{
+.tweet-upper-container{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.user-name-time{
+.tweet-userName-date{
   display: flex;
   align-items: center;
 }
 
-#user-time{
+.tweet-date{
   margin-left: 15px;
 }
 
-#tweet-create-link{
+.tweet-middle-container{
+  margin-bottom: 15px;
+}
+
+.tweet-lower-container{
+  display: flex;
+}
+
+.tweet-comment-link{
+  margin-left: 10px;
+}
+
+#tweet-create-link-outer{
   text-align: right;
   margin: 60px 60px;
 }
 
-#tweet-create-button{
+#tweet-create-link-inner{
   font-size: 25px;
-}
-
-.card-lower-content{
-  display: flex;
-}
-
-.card-comment{
-  margin-left: 10px;
 }

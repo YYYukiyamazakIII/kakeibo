@@ -1,19 +1,17 @@
 const buildHTML = (XHR) => {
   const html = `
-  <div class="comment-content">
-    <div class="comment-upper-content">
+  <div class="comment-inner">
+    <div class="comment-upper-container">
       <div class="comment-user-name">
-      ${XHR.response.name}
+        ${XHR.response.name}
       </div>
-      <div class="comment-created_at">
-      ${XHR.response.time}
+      <div class="comment-date">
+        ${XHR.response.date}
       </div>
     </div>
-    <div class="comment-lower-content">
+    <div class="comment-lower-container">
       <div class="comment-text">
-      ${XHR.response.text}
-      </div>
-      <div class="comment-destroy-button">
+        ${XHR.response.text}
       </div>
     </div>
   </div>`;
@@ -32,13 +30,13 @@ function commentCreate (){
     XHR.responseType = "json";
     XHR.send(formData);
     XHR.onload = () => {
-      if(XHR.response.judge == false){
+      if(XHR.response.judge == "false"){
         XHR.response.message.forEach(function(message){
           alert(message)
         })
         return null;
       };
-      const list = document.getElementById("comment-list")
+      const list = document.getElementById("comments-list")
       const formText = document.getElementById("exampleFormControlInput1");
       list.insertAdjacentHTML("afterbegin", buildHTML(XHR));
       formText.value = "";

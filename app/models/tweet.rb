@@ -10,7 +10,7 @@ class Tweet < ApplicationRecord
     if search != ""
       Tweet.where('text LIKE(?)', "%#{search}%")
     else
-      Tweet.ApplicationController
+      Tweet.all
     end
   end
 end
