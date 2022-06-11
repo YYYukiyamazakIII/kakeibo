@@ -1,18 +1,20 @@
-.mypage-title{
+.user-show-title{
   text-align: center;
   margin: 30px 0;
+  font-size: 30px;
 }
 
-.mypage-info{
-  margin: 0 200px;
+.user-show-outer{
+  width: 70%;
+  margin: 0 auto;
   font-size: 20px;
 }
 
-.mypage-info-list{
+.user-show-inner{
   margin-top: 30px;
 }
 
-.mypage-edit-button{
+.user-edit-link{
   text-align: center;
   margin-top: 60px;
 }

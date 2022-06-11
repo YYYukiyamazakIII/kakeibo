@@ -11,6 +11,10 @@
   padding: 15px 15px;
 }
 
+.comment-title{
+  font-size: 30px;
+}
+
 .comment-inner{
   margin: 15px 0;
 }

@@ -1,43 +1,60 @@
-<div class="mypage-title">
-  <h3>基本情報</h3>
+<div class="user-show-title">
+  基本情報
 </div>
 
-<div class="mypage-info">
+<div class="user-show-outer">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <div class="mypage-info-list">
+      <div class="user-show-inner">
         <div class="row">
-          <div class="col-4">名前</div>
-          <div class="col-8"><%=@user.name%></div>
+          <div class="col-4">
+            名前
+          </div>
+          <div class="col-8">
+            <%=@user.name%>
+          </div>
         </div>
       </div>
     </li>
     <li class="list-group-item">
-      <div class="mypage-info-list">
+      <div class="user-show-inner">
       <div class="row">
-        <div class="col-4">アドレス</div>
-        <div class="col-8"><%=@user.email%></div>
+        <div class="col-4">
+          アドレス
+        </div>
+        <div class="col-8">
+          <%=@user.email%>
+        </div>
       </div>
       </div>
     </li>
     <li class="list-group-item">
-      <div class="mypage-info-list">
-      <div class="row">
-        <div class="col-4">住所</div>
-        <div class="col-8"><%=@user.prefecture.name%> <%=@user.city%></div>
-      </div>
+      <div class="user-show-inner">
+        <div class="row">
+          <div class="col-4">
+            住所
+          </div>
+          <div class="col-8">
+            <%=@user.prefecture.name%> <%=@user.city%>
+          </div>
+        </div>
       </div>
     </li>
     <li class="list-group-item">
-      <div class="mypage-info-list">
-      <div class="row">
-        <div class="col-4">プロフィール</div>
-        <div class="col-8"><%= @user.profile %></div>
-      </div>
+      <div class="user-show-inner">
+        <div class="row">
+          <div class="col-4">
+            プロフィール
+          </div>
+          <div class="col-8">
+            <%= @user.profile %>
+          </div>
+        </div>
       </div>
     </li>
   </ul>
-  <div class="mypage-edit-button">
+
+  <div class="user-edit-link">
     <%= link_to "編集する", edit_user_registration_path, class:"btn btn-primary" %>
   </div>
 </div>
