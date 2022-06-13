@@ -1,4 +1,4 @@
-<div class="form-title">
+<div class="devise-title">
   基本情報の編集
 </div>
 
@@ -35,12 +35,13 @@
   <% end %>
 
   <div class="mb-3">
-    <%= f.label "現在のパスワード" %><br />
+    <%= f.label "現在のパスワード (必須)" %>
     <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
   </div>
 
-  <div class="col-12">
-    <%= f.submit "編集する", class:"btn btn-primary" %>
+  <div class="col-12", id="registration-submit">
+    <div class="registration-submit">
+      <%= f.submit "編集する", class:"btn btn-primary" %>
+    </div>
   </div>
 <% end %>
-

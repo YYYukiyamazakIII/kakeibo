@@ -1,18 +1,20 @@
-.registrations-form{
-  margin: 0 auto;
-  width: 100vh;
-}
-
-.form-title{
+.devise-title{
   text-align: center;
   margin: 20px 0;
   font-size: 30px;
+}
+
+.registrations-form{
+  margin: 0 auto;
+  width: 50vw;
 }
 
 #formGroupExampleInput{
   height: 200px;
 }
 
-.col-12{
+.registration-submit{
   text-align: center;
+  margin: 20px 0;
 }
+

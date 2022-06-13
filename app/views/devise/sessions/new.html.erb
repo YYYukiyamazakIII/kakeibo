@@ -1,13 +1,13 @@
-<div class="form-title">
+<div class="devise-title">
   ログイン
 </div>
-<%= form_with model: @user, url: user_session_path, class:"registrations-form", local: true do |f| %>
 
+<div class="registrations-form">
+  <%= form_with model: @user, url: user_session_path, local: true do |f| %>
   <div>
     <%= flash[:notice] %>
     <%= flash[:alert] %>
   </div>
-
   <div class="field">
     <div class="mb-3">
       <%= f.label "メールアドレス" %>
@@ -18,8 +18,10 @@
      <%= f.password_field :password, class:"form-control" %>
     </div>
     <div class="col-12">
+      <div class="registration-submit">
       <%= f.submit "ログイン", class:"btn btn-primary" %>
+      </div>
     </div>
   </div>
-  
-<% end %>
+  <% end %>
+  </div>
