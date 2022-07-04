@@ -10,6 +10,8 @@ ja:
         name: 名前
         value: 値段
         category_id: カテゴリ
+        date: 日付
+        user_id: ユーザーID
       tweet:
         text: テキスト
       comment:
