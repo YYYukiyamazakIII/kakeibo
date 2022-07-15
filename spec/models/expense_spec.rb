@@ -6,7 +6,7 @@ RSpec.describe Expense, type: :model do
   end
 
   describe '出費新規登録' do
-    it 'name, value, category_id, date,user_idが正しく入力されているとき登録できる' do
+    it 'name, value, category_id, dateが正しく入力され、userが紐づているとき登録できる' do
       expect(@expense).to be_valid
     end
     it 'nameが空では登録できない' do
@@ -45,10 +45,16 @@ RSpec.describe Expense, type: :model do
       expect(@expense.errors.full_messages).to include "カテゴリを入力してください"
     end
 
-    it 'category_idが2〜17以外では登録できない' do
+    it 'category_idが1以外では登録できない' do
       @expense.category_id = 1
       @expense.valid?
-      expect(@expense.errors.full_messages).to include "カテゴリを入力してください"
+      expect(@expense.errors.full_messages).to include "カテゴリは2以上の値にしてください"
+    end
+
+    it 'category_idが18以上では登録できない' do
+      @expense.category_id = 18
+      @expense.valid?
+      expect(@expense.errors.full_messages).to include "カテゴリは17以下の値にしてください"
     end
 
     it 'dateが空では登録できない' do
@@ -57,10 +63,10 @@ RSpec.describe Expense, type: :model do
       expect(@expense.errors.full_messages).to include "日付を入力してください"
     end
 
-    it 'user_idが空では登録できない' do
-      @expense.user_id = ""
+    it 'userが紐づいていないと登録できない' do
+      @expense.user = nil
       @expense.valid?
-      expect(@expense.errors.full_messages).to include "ユーザーIDを入力してください"
+      expect(@expense.errors.full_messages).to include"Userを入力してください"
     end
   end
 end

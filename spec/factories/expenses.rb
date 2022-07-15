@@ -4,6 +4,6 @@ FactoryBot.define do
     value       { Faker::Number.between(from: 1, to: 9999999) }
     category_id { Faker::Number.between(from: 2, to: 17) }
     date        { Date.today }
-    user_id     { 1 }
+    association :user
   end
 end

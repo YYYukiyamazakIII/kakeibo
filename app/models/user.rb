@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :good_tweets
 
-  validates :name, :prefecture_id, :city, :profile, presence: true
-  validates :prefecture_id, numericality: { other_than: 1, message: 'を入力してください' }
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :prefecture_id, presence: true, numericality: { greater_than_or_equal_to: 2, less_than_or_equal_to: 48 }
+  validates :city, presence: true, length: { maximum: 40 }
+  validates :profile, presence: true, length: { maximum: 200 }
 end
