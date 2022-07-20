@@ -18,6 +18,12 @@ RSpec.describe Tweet, type: :model do
       expect(@tweet.errors.full_messages).to include "テキストを入力してください"
     end
 
+    it 'textが201文字以上だと登録できない' do
+      @tweet.text = Faker::Lorem.characters( number: 201 )
+      @tweet.valid?
+      expect(@tweet.errors.full_messages).to include "テキストは200文字以内で入力してください"
+    end
+
     it 'userが紐づいていないと登録できない' do
       @tweet.user = nil
       @tweet.valid?

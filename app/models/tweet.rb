@@ -4,7 +4,7 @@ class Tweet < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :good_tweets, dependent: :destroy
 
-  validates :text, presence: true
+  validates :text, presence: true, length: { maximum: 200 }
 
   def self.search(search)
     if search != ""
