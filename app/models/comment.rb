@@ -1,6 +1,5 @@
 class Comment < ApplicationRecord
-  validates :text, presence: true
-
+  validates :text, presence: true, length: { maximum: 100 }
   belongs_to :user
   belongs_to :tweet
 end
