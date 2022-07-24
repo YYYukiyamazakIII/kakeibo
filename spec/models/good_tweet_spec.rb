@@ -21,5 +21,13 @@ RSpec.describe GoodTweet, type: :model do
       @good_tweet.valid?
       expect(@good_tweet.errors.full_messages).to include "Tweetを入力してください"
     end
+
+    it 'いいね登録したツイートを重複していいね登録できない' do
+      another_good_tweet = FactoryBot.create(:good_tweet)
+      @good_tweet.user_id = another_good_tweet.user_id
+      @good_tweet.tweet_id = another_good_tweet.tweet_id
+      @good_tweet.valid?
+      expect(@good_tweet.errors.full_messages).to include "Tweetはすでに存在します"
+    end
   end
 end
