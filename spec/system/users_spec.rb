@@ -88,9 +88,14 @@ RSpec.describe "ログイン", type: :system do
   context 'ログインができない時' do
     it '保存されているユーザーの情報と合致しないとログインができない' do
       # トップページに移動する
+      visit root_path
       # ユーザー情報を入力する
+      fill_in 'user_email', with: ''
+      fill_in 'user_password', with: ''
       # ログインボタンを押す
+      find('input[name="commit"]').click
       # ログインページへ戻されることを確認する
+      expect(current_path).to eq user_session_path
     end
   end
 end
