@@ -36,7 +36,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
       expect(page).to have_no_content('ログイン')
     end
   end
-
+ 
   context 'ユーザー新規登録ができない時' do
     it '誤った情報ではユーザー式登録ができずに新規登録ページに戻ってくる' do
       # トップページに移動する
