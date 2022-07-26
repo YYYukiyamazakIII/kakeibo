@@ -34,4 +34,16 @@ RSpec.describe "つぶやき投稿", type: :system do
       expect(page).to have_content @tweet.text
     end
   end
+
+  context 'つぶやき投稿ができない時' do
+    it 'ログインしていないとつぶやき一覧ベージに移動できない' do
+      # トップページに遷移する
+      visit root_path
+      # つぶやきページへのボタンがあることを確認する
+      expect(page).to have_content "つぶやき"
+      # つぶやき一覧ページへ移動してもトップページに戻されることを確認する
+      visit tweets_path
+      expect(current_path).to eq new_user_session_path
+    end
+  end
 end
