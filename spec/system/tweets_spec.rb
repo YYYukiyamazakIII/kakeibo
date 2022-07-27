@@ -36,7 +36,7 @@ RSpec.describe "つぶやき投稿", type: :system do
   end
 
   context 'つぶやき投稿ができない時' do
-    it 'ログインしていないとつぶやき一覧ベージに移動できない' do
+    it 'ログインしていないとつぶやき投稿ベージに移動できない' do
       # トップページに遷移する
       visit root_path
       # つぶやきページへのボタンがあることを確認する
@@ -95,6 +95,14 @@ RSpec.describe 'つぶやき編集', type: :system do
       expect(
         all('.dropdown')[0].click
       ).to have_no_link '編集する', href: edit_tweet_path(@tweet2)
+    end
+
+    it 'ログインしていないとつぶやきの編集画面には遷移できない' do
+      # トップページに移動する
+      visit root_path
+      # つぶやき編集ページへ移動してもトップページに戻されることを確認する
+      visit edit_tweet_path(@tweet1)
+      expect(current_path).to eq new_user_session_path
     end
   end
 end
