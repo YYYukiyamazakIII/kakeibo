@@ -81,4 +81,20 @@ RSpec.describe 'つぶやき編集', type: :system do
       expect(page).to have_content "#{@tweet1.text}+編集済み"
     end
   end
+
+  context 'つぶやき編集ができない時' do
+    it 'ログインしたユーザーは自分以外が投稿したつぶやきの編集画面には遷移できない' do
+      # @tweet1を投稿したユーザーでログインする
+      visit root_path
+      fill_in 'user_email', with: @tweet1.user.email
+      fill_in 'user_password', with: @tweet1.user.password
+      find('input[name=commit]').click
+      # つぶやき一覧ページへ移動する
+      visit tweets_path
+      # @tweet2に編集のリンクがないことを確認する
+      expect(
+        all('.dropdown')[0].click
+      ).to have_no_link '編集する', href: edit_tweet_path(@tweet2)
+    end
+  end
 end
