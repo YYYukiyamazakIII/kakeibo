@@ -39,10 +39,8 @@ RSpec.describe "つぶやき投稿", type: :system do
     it 'ログインしていないとつぶやき投稿ベージに移動できない' do
       # トップページに遷移する
       visit root_path
-      # つぶやきページへのボタンがあることを確認する
-      expect(page).to have_content "つぶやき"
-      # つぶやき一覧ページへ移動してもトップページに戻されることを確認する
-      visit tweets_path
+      # つぶやき投稿ページへ移動してもログインページに戻されることを確認する
+      visit new_tweet_path
       expect(current_path).to eq new_user_session_path
     end
   end
@@ -100,7 +98,7 @@ RSpec.describe 'つぶやき編集', type: :system do
     it 'ログインしていないとつぶやきの編集画面には遷移できない' do
       # トップページに移動する
       visit root_path
-      # つぶやき編集ページへ移動してもトップページに戻されることを確認する
+      # つぶやき編集ページへ移動してもログインページに戻されることを確認する
       visit edit_tweet_path(@tweet1)
       expect(current_path).to eq new_user_session_path
     end
