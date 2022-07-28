@@ -104,3 +104,34 @@ RSpec.describe 'つぶやき編集', type: :system do
     end
   end
 end
+
+RSpec.describe 'つぶやき削除', type: :system do
+  before do
+    @tweet1 = FactoryBot.create(:tweet)
+    @tweet2 = FactoryBot.create(:tweet)
+  end
+
+  context 'つぶやき削除ができる時' do
+    it 'ログインしたユーザーは自らが投稿したつぶやきの削除ができる' do
+      # @tweet1を投稿したユーザーでログインする
+      visit root_path
+      fill_in 'user_email', with: @tweet1.user.email
+      fill_in 'user_password', with: @tweet1.user.password
+      find('input[name=commit]').click
+      # つぶやき一覧ページへ移動する
+      visit tweets_path
+       # @tweet1に削除へのリンクがあることを確認する
+       expect(
+        all('.dropdown')[0].click
+      ).to have_link '削除する', href: tweet_path(@tweet1)
+      # 投稿を削除するとレコードの数が1減ることを確認する
+      expect{
+        find_link('削除する', href: tweet_path(@tweet1)).click
+      }.to change { Tweet.count }.by(-1)
+      # つぶやき一覧ページに移動する
+      expect(current_path).to eq tweets_path
+      # つぶやき一覧ページには@tweet1が存在しないことを確認する
+      expect(page).to have_no_content @tweet1.text
+    end
+  end
+end
