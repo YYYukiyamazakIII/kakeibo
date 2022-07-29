@@ -184,4 +184,14 @@ RSpec.describe 'つぶやき詳細', type: :system do
       expect(page).to have_selector 'form'
     end
   end
+
+  context 'つぶやき詳細ページへ移動できない時' do
+    it 'ログインしていない状態でつぶやき詳細ページに移動できない' do
+      # ログインする
+      visit root_path
+      # つぶやき一覧ページへ移動してもログインページに戻されることを確認する
+      visit tweets_path
+      expect(current_path).to eq new_user_session_path
+    end
+  end
 end
