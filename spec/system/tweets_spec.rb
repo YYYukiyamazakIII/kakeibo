@@ -134,4 +134,20 @@ RSpec.describe 'つぶやき削除', type: :system do
       expect(page).to have_no_content @tweet1.text
     end
   end
+
+  context 'つぶやき削除ができない時' do
+    it 'ログインしたユーザーは自分以外が投稿したつぶやきの削除ができない' do
+      # @tweet1を投稿したユーザーでログインする
+      visit root_path
+      fill_in 'user_email', with: @tweet1.user.email
+      fill_in 'user_password', with: @tweet1.user.password
+      find('input[name=commit]').click
+      # つぶやき一覧ページに移動する
+      visit tweets_path
+      # @tweet2に削除リンクがないことを確認する
+      expect(
+        all('.dropdown')[0].click
+      ).to have_no_link '編集する', href: edit_tweet_path(@tweet2)
+    end
+  end
 end
