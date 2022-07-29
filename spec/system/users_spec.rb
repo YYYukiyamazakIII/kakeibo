@@ -99,3 +99,29 @@ RSpec.describe "ログイン", type: :system do
     end
   end
 end
+
+RSpec.describe "ユーザー詳細", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+  end
+
+  context "ユーザー詳細ページに移動できる時" do
+    it 'ログインすればユーザー詳細ページに移動できる' do
+      # ログインする
+      visit root_path
+      fill_in 'user_email', with: @user.email
+      fill_in 'user_password', with: @user.password
+      find('input[name=commit]').click
+      binding.pry
+      # ユーザー詳細ページへのリンクがあることを確認する
+      expect(page).to have_link 'マイページ', href: user_path(@user)
+      # ユーザー詳細ページへ移動する
+      visit user_path(@user)
+      # ユーザー情報が存在することを確認する
+      expect(page).to have_content @user.name
+      expect(page).to have_content @user.email
+      expect(page).to have_content "#{@user.prefecture.name} #{@user.city}"
+      expect(page).to have_content @user.profile
+    end
+  end
+end
