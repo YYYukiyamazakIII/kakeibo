@@ -159,3 +159,29 @@ RSpec.describe 'つぶやき削除', type: :system do
     end
   end
 end
+
+RSpec.describe 'つぶやき詳細', type: :system do
+  before do
+    @tweet1 = FactoryBot.create(:tweet)
+  end
+
+  context 'つぶやき詳細ページへ移動できる時' do
+    it 'ログインしたユーザーはつぶやき詳細ページに移動してコメント投稿欄が表示される' do
+      # ログインする
+      visit root_path
+      fill_in 'user_email', with: @tweet1.user.email
+      fill_in 'user_password', with: @tweet1.user.password
+      find('input[name=commit]').click
+      # つぶやき一覧ページへ移動する
+      visit tweets_path
+      # つぶやきに詳細ページへのリンクがあることを確認する
+      expect(page).to have_link 'コメント', href: tweet_path(@tweet1)
+      # 詳細ページに移動する
+      visit tweet_path(@tweet1)
+      # 詳細ページにつぶやきの内容が存在することを確認する
+      expect(page).to have_content @tweet1.text
+      # 詳細ページにコメント投稿フォームが存在することを確認する
+      expect(page).to have_selector 'form'
+    end
+  end
+end
