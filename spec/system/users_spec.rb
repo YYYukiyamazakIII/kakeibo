@@ -112,7 +112,6 @@ RSpec.describe "ユーザー詳細", type: :system do
       fill_in 'user_email', with: @user.email
       fill_in 'user_password', with: @user.password
       find('input[name=commit]').click
-      binding.pry
       # ユーザー詳細ページへのリンクがあることを確認する
       expect(page).to have_link 'マイページ', href: user_path(@user)
       # ユーザー詳細ページへ移動する
@@ -122,6 +121,16 @@ RSpec.describe "ユーザー詳細", type: :system do
       expect(page).to have_content @user.email
       expect(page).to have_content "#{@user.prefecture.name} #{@user.city}"
       expect(page).to have_content @user.profile
+    end
+  end
+
+
+  context "ユーザー詳細ページに移動できない時" do
+    it 'ログインをしていないとユーザー詳細ページに移動できない' do
+      # トップページに移動する
+      visit root_path
+      # ユーザー詳細ページへのリンクが存在しないことを確認する
+      expect(page).to have_no_link 'マイページ', href: user_path(@user)
     end
   end
 end
