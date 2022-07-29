@@ -149,5 +149,13 @@ RSpec.describe 'つぶやき削除', type: :system do
         all('.dropdown')[0].click
       ).to have_no_link '編集する', href: edit_tweet_path(@tweet2)
     end
+
+    it 'ログインしていないとつぶやき削除ができない' do
+      # トップページに移動する
+      visit root_path
+      # つぶやき一覧ページへ移動してもログインページに戻されることを確認する
+      visit tweets_path
+      expect(current_path).to eq new_user_session_path
+    end
   end
 end
