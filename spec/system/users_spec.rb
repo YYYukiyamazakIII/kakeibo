@@ -202,5 +202,12 @@ RSpec.describe "ユーザー編集", type: :system do
       # ユーザー編集ページに戻されることを確認する
       expect(current_path).to eq user_registration_path
     end
+
+    it 'ログインをしていないとユーザー編集できない' do
+       # トップページに移動する
+       visit root_path
+       # ユーザー詳細ページへのリンクが存在しないことを確認する
+       expect(page).to have_no_link 'マイページ', href: user_path(@user)
+    end
   end
 end
