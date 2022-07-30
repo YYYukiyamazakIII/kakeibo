@@ -50,6 +50,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
       fill_in 'user_email', with: ''
       fill_in 'user_password', with: ''
       fill_in 'user_password_confirmation', with: ''
+      select "--", from: "user[prefecture_id]"
       fill_in 'user_city', with: ''
       fill_in 'formGroupExampleInput', with: ''
       # サインアップボタンを押してもユーザーモデルのカウントは上がらないことを確認する
@@ -139,7 +140,7 @@ RSpec.describe "ユーザー編集", type: :system do
     @user = FactoryBot.create(:user)
   end
 
-  context 'ユーザー編集' do
+  context 'ユーザー編集ができる時' do
     it 'ログインをして正しい情報を入力すればユーザー編集ができる' do
       # ログインする
       visit root_path
@@ -171,6 +172,35 @@ RSpec.describe "ユーザー編集", type: :system do
       expect(page).to have_content "#{@user.email}edited"
       expect(page).to have_content "北海道 #{@user.city}編集済み"
       expect(page).to have_content "#{@user.profile}編集済み"
+    end
+  end
+
+  context 'ユーザー編集ができない時' do
+    it '誤った情報を入力すればユーザー編集ができない' do
+      # ログインする
+      visit root_path
+      fill_in 'user_email', with: @user.email
+      fill_in 'user_password', with: @user.password
+      find('input[name=commit]').click
+      # ユーザー詳細ページへ移動する
+      visit user_path(@user)
+      # ユーザー編集ページへのリンクがあることを確認する
+      expect(page).to have_link '編集する', href: edit_user_registration_path
+      # ユーザー編集ページに移動する
+      visit edit_user_registration_path
+      # ユーザー情報を編集する
+      fill_in "user_name", with: ""
+      fill_in "user_email", with: ""
+      select "--", from: "user[prefecture_id]"
+      fill_in 'user_city', with: ""
+      fill_in 'formGroupExampleInput', with: ""
+      fill_in 'user_current_password', with: @user.password
+      # 編集をしてもUsrモデルのカウントは変わらないことを確認する
+      expect{
+        find('input[name=commit]').click
+      }.to change { User.count }.by(0)
+      # ユーザー編集ページに戻されることを確認する
+      expect(current_path).to eq user_registration_path
     end
   end
 end
