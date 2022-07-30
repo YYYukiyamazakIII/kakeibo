@@ -187,7 +187,7 @@ RSpec.describe 'つぶやき詳細', type: :system do
 
   context 'つぶやき詳細ページへ移動できない時' do
     it 'ログインしていない状態でつぶやき詳細ページに移動できない' do
-      # ログインする
+      # トップページに移動する
       visit root_path
       # つぶやき一覧ページへ移動してもログインページに戻されることを確認する
       visit tweets_path

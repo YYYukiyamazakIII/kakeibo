@@ -50,6 +50,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
       fill_in 'user_email', with: ''
       fill_in 'user_password', with: ''
       fill_in 'user_password_confirmation', with: ''
+      select "--", from: "user[prefecture_id]"
       fill_in 'user_city', with: ''
       fill_in 'formGroupExampleInput', with: ''
       # サインアップボタンを押してもユーザーモデルのカウントは上がらないことを確認する
@@ -96,6 +97,117 @@ RSpec.describe "ログイン", type: :system do
       find('input[name="commit"]').click
       # ログインページへ戻されることを確認する
       expect(current_path).to eq user_session_path
+    end
+  end
+end
+
+RSpec.describe "ユーザー詳細", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+  end
+
+  context "ユーザー詳細ページに移動できる時" do
+    it 'ログインすればユーザー詳細ページに移動できる' do
+      # ログインする
+      visit root_path
+      fill_in 'user_email', with: @user.email
+      fill_in 'user_password', with: @user.password
+      find('input[name=commit]').click
+      # ユーザー詳細ページへのリンクがあることを確認する
+      expect(page).to have_link 'マイページ', href: user_path(@user)
+      # ユーザー詳細ページへ移動する
+      visit user_path(@user)
+      # ユーザー情報が存在することを確認する
+      expect(page).to have_content @user.name
+      expect(page).to have_content @user.email
+      expect(page).to have_content "#{@user.prefecture.name} #{@user.city}"
+      expect(page).to have_content @user.profile
+    end
+  end
+
+  context "ユーザー詳細ページに移動できない時" do
+    it 'ログインをしていないとユーザー詳細ページに移動できない' do
+      # トップページに移動する
+      visit root_path
+      # ユーザー詳細ページへのリンクが存在しないことを確認する
+      expect(page).to have_no_link 'マイページ', href: user_path(@user)
+    end
+  end
+end
+
+RSpec.describe "ユーザー編集", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+  end
+
+  context 'ユーザー編集ができる時' do
+    it 'ログインをして正しい情報を入力すればユーザー編集ができる' do
+      # ログインする
+      visit root_path
+      fill_in 'user_email', with: @user.email
+      fill_in 'user_password', with: @user.password
+      find('input[name=commit]').click
+      # ユーザー詳細ページへ移動する
+      visit user_path(@user)
+      # ユーザー編集ページへのリンクがあることを確認する
+      expect(page).to have_link '編集する', href: edit_user_registration_path
+      # ユーザー編集ページに移動する
+      visit edit_user_registration_path
+      # ユーザー情報を編集する
+      fill_in "user_name", with: "#{@user.name}編集済み"
+      fill_in "user_email", with: "#{@user.email}edited"
+      select "北海道", from: "user[prefecture_id]"
+      fill_in 'user_city', with: "#{@user.city}編集済み"
+      fill_in 'formGroupExampleInput', with: "#{@user.profile}編集済み"
+      fill_in 'user_current_password', with: @user.password
+      # 編集をしてもUsrモデルのカウントは変わらないことを確認する
+      expect{
+        find('input[name=commit]').click
+      }.to change { User.count }.by(0)
+      # 編集後はトップページへ遷移することを確認する
+      expect(current_path).to eq root_path
+      # ユーザー詳細ページへ移動しユーザー情報が編集されていることを確認する
+      visit user_path(@user)
+      expect(page).to have_content "#{@user.name}編集済み"
+      expect(page).to have_content "#{@user.email}edited"
+      expect(page).to have_content "北海道 #{@user.city}編集済み"
+      expect(page).to have_content "#{@user.profile}編集済み"
+    end
+  end
+
+  context 'ユーザー編集ができない時' do
+    it '誤った情報を入力すればユーザー編集ができない' do
+      # ログインする
+      visit root_path
+      fill_in 'user_email', with: @user.email
+      fill_in 'user_password', with: @user.password
+      find('input[name=commit]').click
+      # ユーザー詳細ページへ移動する
+      visit user_path(@user)
+      # ユーザー編集ページへのリンクがあることを確認する
+      expect(page).to have_link '編集する', href: edit_user_registration_path
+      # ユーザー編集ページに移動する
+      visit edit_user_registration_path
+      # ユーザー情報を編集する
+      fill_in "user_name", with: ""
+      fill_in "user_email", with: ""
+      select "--", from: "user[prefecture_id]"
+      fill_in 'user_city', with: ""
+      fill_in 'formGroupExampleInput', with: ""
+      fill_in 'user_current_password', with: @user.password
+      # 編集をしてもUsrモデルのカウントは変わらないことを確認する
+      expect{
+        find('input[name=commit]').click
+      }.to change { User.count }.by(0)
+      # ユーザー編集ページに戻されることを確認する
+      expect(current_path).to eq user_registration_path
+    end
+
+    it 'ログインをしていないとユーザー編集できない' do
+       # トップページに移動する
+       visit root_path
+       # ユーザー詳細ページへのリンクが存在しないことを確認する
+       expect(page).to have_no_link 'マイページ', href: user_path(@user)
     end
   end
 end
